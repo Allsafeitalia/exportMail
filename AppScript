@@ -1,0 +1,16 @@
+function getEmailsFromSent() {
+  var threads = GmailApp.search("in:sent"); // Cerca tutte le email nella cartella "inviate"
+  var addresses = []; // Array vuoto per memorizzare gli indirizzi email
+  
+  for (var i = 0; i < threads.length; i++) {
+    var messages = threads[i].getMessages(); // Ottieni tutti i messaggi in ogni thread (conversazione)
+    
+    for (var j = 0; j < messages.length; j++) {
+      var toEmails = messages[j].getTo().split(","); // Prendi gli indirizzi email dei destinatari
+      addresses = addresses.concat(toEmails); // Aggiungi gli indirizzi all'array 'addresses'
+    }
+  }
+  
+  var uniqueAddresses = Array.from(new Set(addresses)); // Rimuove i duplicati creando un Set
+  Logger.log(uniqueAddresses.join("\n")); // Stampa tutti gli indirizzi unici nel Logger
+}
