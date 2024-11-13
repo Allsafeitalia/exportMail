@@ -1,22 +1,4 @@
-# Gmail Sent Email Extractor
-
-Questo script di Google Apps Script consente di estrarre gli indirizzi email dai messaggi inviati nella tua casella di posta Gmail. Raccoglie automaticamente tutti gli indirizzi dei destinatari dalle email inviate, rimuove i duplicati e li visualizza in un elenco.
-
-## Requisiti
-- Un account Google
-- Accesso a Google Drive
-
-## Istruzioni per l'uso
-
-### Passo 1: Creare lo Script
-1. Apri **Google Drive**.
-2. Crea un nuovo **Documento Google** o **Foglio Google**.
-3. Vai su **Estensioni > Apps Script** per aprire l'editor di script.
-
-### Passo 2: Inserire il Codice
-Copia e incolla il seguente codice nell'editor di script:
-
-```function getEmailsFromSent() {
+function getEmailsFromSent() {
   var ui = SpreadsheetApp.getUi(); // Per mostrare i dialoghi all'utente
 
   // Richiedi all'utente di inserire la data di inizio
@@ -107,8 +89,18 @@ Copia e incolla il seguente codice nell'editor di script:
     }
   }
 
-  // Stampa i risultati nel Logger
+  // Scrive i risultati sul foglio di Google
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.clearContents(); // Pulisce il foglio corrente
+
+  // Scrive l'intestazione
+  sheet.appendRow(['Nome', 'Email', 'Oggetto']);
+
+  // Scrive i dati
   for (var i = 0; i < uniqueAddresses.length; i++) {
-    Logger.log("Nome: " + uniqueAddresses[i].name + ", Email: " + uniqueAddresses[i].email + ", Oggetto: " + uniqueAddresses[i].subject);
+    sheet.appendRow([uniqueAddresses[i].name, uniqueAddresses[i].email, uniqueAddresses[i].subject]);
   }
+
+  ui.alert('I dati sono stati scritti sul foglio di Google.');
 }
+
