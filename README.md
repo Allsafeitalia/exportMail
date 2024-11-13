@@ -1,3 +1,33 @@
+# Script per Estrarre Email Inviate e Scriverle su Google Sheets
+
+Questo script di Google Apps Script permette di estrarre informazioni dalle email inviate (cartella "Inviati") in Gmail entro un determinato intervallo di date. Le informazioni estratte includono il nome del destinatario, l'indirizzo email e l'oggetto dell'email. I dati vengono poi scritti direttamente su un foglio di Google Sheets.
+
+## Caratteristiche
+
+- **Selezione dell'intervallo di date**: Consente all'utente di specificare un intervallo di date tra il 1° ottobre 2023 e il 31 dicembre 2023.
+- **Estrazione delle informazioni**: Estrae il nome, l'indirizzo email e l'oggetto di ogni email inviata nell'intervallo di date selezionato.
+- **Rimozione dei duplicati**: Elimina duplicati basati sulla combinazione di email e oggetto.
+- **Output su Google Sheets**: Scrive i dati estratti direttamente sul foglio di Google Sheets attivo.
+
+## Prerequisiti
+
+- **Account Google**: Assicurati di essere connesso con il tuo account Google.
+- **Google Sheets**: Un foglio di Google Sheets dove eseguire lo script.
+- **Permessi**: Lo script richiede l'accesso al tuo account Gmail e Google Sheets per funzionare correttamente.
+
+## Installazione
+
+1. **Apri Google Sheets**: Crea un nuovo foglio di Google Sheets o utilizza uno esistente.
+2. **Accedi all'Editor di Script**:
+   - Vai su `Strumenti` > `Editor di script`.
+3. **Incolla lo Script**:
+   - Copia il codice dello script (fornito di seguito) e incollalo nell'editor, sostituendo qualsiasi codice preesistente.
+4. **Salva lo Script**:
+   - Assegna un nome al progetto, ad esempio "EstrazioneEmailInviate", e salva.
+
+## Codice dello Script
+
+```javascript
 function getEmailsFromSent() {
   var ui = SpreadsheetApp.getUi(); // Per mostrare i dialoghi all'utente
 
@@ -103,4 +133,3 @@ function getEmailsFromSent() {
 
   ui.alert('I dati sono stati scritti sul foglio di Google.');
 }
-
